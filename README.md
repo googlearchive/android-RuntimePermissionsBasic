@@ -12,6 +12,7 @@ Android M introduced runtime permissions. Applications targeting M and above nee
 permissions at runtime.
 This sample introduces the basic use of the runtime permissions API by checking for permissions (Activity#checkSelfPermission(String)), requesting permissions (Activity#requestPermissions(String[],int))
 and handling the permission request callback (Activity#onRequestPermissionsResult(int, permissions[], int[])).
+An application can display additional context and justification for a permission after calling Activity#shouldShowRequestPermissionRationale(String).
 
 See the "RuntimePermissions" sample for a more complete description and reference implementation.
 
