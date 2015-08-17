@@ -3,24 +3,27 @@ Android RuntimePermissionsBasic Sample
 ===================================
 
 This basic sample shows runtime permissions available in the Android M and above.
-It shows how to use the new runtime permission API to check for and request permissions.
+It shows how to use the new runtime permissions API to check and request permissions through the
+support library.
 
 Introduction
 ------------
 
 Android M introduced runtime permissions. Applications targeting M and above need to request their
 permissions at runtime.
-This sample introduces the basic use of the runtime permissions API by checking for permissions (Activity#checkSelfPermission(String)), requesting permissions (Activity#requestPermissions(String[],int))
-and handling the permission request callback (Activity#onRequestPermissionsResult(int, permissions[], int[])).
-An application can display additional context and justification for a permission after calling Activity#shouldShowRequestPermissionRationale(String).
+This sample introduces the basic use of the runtime permissions API through the support library by
+verifying permissions (ActivityCompat#checkSelfPermission(Context, String)), requesting permissions (ActivityCompat#requestPermissions(Activity, String[], int))
+and handling the permission request callback (ActivityCompat.OnRequestPermissionsResultCallback).
+An application can display additional context and justification for a permission after calling
+ActivityCompat#shouldShowRequestPermissionRationale#shouldShowRequestPermissionRationale(Activity, String).
 
 See the "RuntimePermissions" sample for a more complete description and reference implementation.
 
 Pre-requisites
 --------------
 
-- Android SDK vandroid-MNC
-- Android Build Tools v22.0.1
+- Android SDK v23
+- Android Build Tools v23.0.0
 - Android Support Repository
 
 Screenshots
