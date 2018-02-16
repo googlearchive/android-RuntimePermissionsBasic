@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 repositories {
     jcenter()
@@ -11,11 +12,13 @@ dependencies {
     compile "com.android.support:cardview-v7:27.0.2"
     compile "com.android.support:appcompat-v7:27.0.2"
     compile 'com.android.support:design:27.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 List<String> dirs = ['main']
 
 android {
+
     compileSdkVersion 27
 
     defaultConfig {
@@ -37,6 +40,5 @@ android {
         }
         androidTest.setRoot('tests')
         androidTest.java.srcDirs = ['tests/src']
-
     }
 }

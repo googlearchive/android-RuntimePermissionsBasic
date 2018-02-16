@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2013 The Android Open Source Project
+  Copyright 2017 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -15,10 +16,9 @@
   -->
 
 <resources>
-
-    <!-- Semantic definitions -->
-
-    <dimen name="horizontal_page_margin">@dimen/margin_huge</dimen>
-    <dimen name="vertical_page_margin">@dimen/margin_medium</dimen>
-
+    <style name="Widget.SampleMessage">
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:shadowDy">-6.5</item>
+    </style>
 </resources>

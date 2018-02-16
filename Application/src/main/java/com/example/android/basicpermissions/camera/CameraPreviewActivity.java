@@ -16,13 +16,14 @@
 
 package com.example.android.basicpermissions.camera;
 
-import com.example.android.basicpermissions.R;
-
 import android.app.Activity;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.example.android.basicpermissions.R;
 
 /**
  * Displays a {@link CameraPreview} of the first {@link Camera}.
@@ -36,15 +37,12 @@ import android.widget.Toast;
  * http://developer.android.com/guide/topics/media/camera.html
  */
 public class CameraPreviewActivity extends Activity {
-
-    private static final String TAG = "CameraPreview";
-
+    private static final String TAG = "CameraPreviewActivity";
     /**
      * Id of the camera to access. 0 is the first camera.
      */
     private static final int CAMERA_ID = 0;
 
-    private CameraPreview mPreview;
     private Camera mCamera;
 
     @Override
@@ -56,22 +54,21 @@ public class CameraPreviewActivity extends Activity {
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         Camera.getCameraInfo(CAMERA_ID, cameraInfo);
 
-        if (mCamera == null || cameraInfo == null) {
+        if (mCamera == null) {
             // Camera is not available, display error message
-            Toast.makeText(this, "Camera is not available.", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.activity_camera_unavailable);
         } else {
 
             setContentView(R.layout.activity_camera);
 
             // Get the rotation of the screen to adjust the preview image accordingly.
-            final int displayRotation = getWindowManager().getDefaultDisplay()
-                    .getRotation();
+            int displayRotation = getWindowManager().getDefaultDisplay().getRotation();
 
             // Create the Preview view and set it as the content of this Activity.
-            mPreview = new CameraPreview(this, mCamera, cameraInfo, displayRotation);
-            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-            preview.addView(mPreview);
+            CameraPreview cameraPreview = new CameraPreview(this, null,
+                    0, mCamera, cameraInfo, displayRotation);
+            FrameLayout preview = findViewById(R.id.camera_preview);
+            preview.addView(cameraPreview);
         }
     }
 
@@ -82,22 +79,26 @@ public class CameraPreviewActivity extends Activity {
         releaseCamera();
     }
 
-    /** A safe way to get an instance of the Camera object. */
+    /**
+     * A safe way to get an instance of the Camera object.
+     */
     private Camera getCameraInstance(int cameraId) {
         Camera c = null;
         try {
             c = Camera.open(cameraId); // attempt to get a Camera instance
         } catch (Exception e) {
             // Camera is not available (in use or does not exist)
-            Toast.makeText(this, "Camera " + cameraId + " is not available: " + e.getMessage(),
-                    Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Camera " + cameraId + " is not available: " + e.getMessage());
         }
         return c; // returns null if camera is unavailable
     }
 
+    /**
+     * Release the camera for other applications.
+     */
     private void releaseCamera() {
         if (mCamera != null) {
-            mCamera.release();        // release the camera for other applications
+            mCamera.release();
             mCamera = null;
         }
     }
